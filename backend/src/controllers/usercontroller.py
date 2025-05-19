@@ -2,6 +2,7 @@ from src.controllers.controller import Controller
 from src.util.dao import DAO
 
 import re
+import warnings
 emailValidator = re.compile(r'.*@.*')
 
 class UserController(Controller):
@@ -33,14 +34,15 @@ class UserController(Controller):
             if len(users) == 1:
                 return users[0]
             else:
-                print(f'Error: more than one user found with mail {email}')
+                # print(f'Error: more than one user found with mail {email}')
+                warnings.warn(f'Error: more than one user found with mail {email}', UserWarning)
                 return users[0]
         except Exception as e:
             raise
 
     def update(self, id, data):
         try:
-            update_result = super().update(id=id, data={'$set': data})
+            update_result = super().update(id=id, update_data={'$set': data})
             return update_result
         except Exception as e:
             raise
