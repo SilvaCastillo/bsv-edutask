@@ -1,6 +1,8 @@
 name: Run Backend Tests
 
 on:
+  push:
+    branches: [ main, dev_chris ]
   pull_request:
     branches: [ main ]
     workflow_dispatch:
